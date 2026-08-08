@@ -1,0 +1,315 @@
+Korean (South Korea)
+
+// Difficulties
+difficulty_: ""
+
+difficulty_easy: "쉬움"
+difficulty_normal: "중간"
+difficulty_hard: "어려움"
+
+// Achievements
+achievement_: ""
+description_: ""
+
+
+// Freeplay
+musicplayer_playing: "PLAYING: {1}"
+musicplayer_paused: "PLAYING: {1} (PAUSED)"
+musicplayer_tip: "Press SPACE to Pause / Press ESCAPE to Exit / Press R to Reset the Song"
+
+// Options
+setting_scroll_type: "Scroll Type"
+setting_scroll_speed: "Scroll Speed"
+setting_playback_rate: "Playback Rate"
+setting_health_gain_multiplier: "Health Gain Multiplier"
+setting_health_loss_multiplier: "Health Loss Multiplier"
+setting_instakill_on_miss: "Instakill on Miss"
+setting_practice_mode: "Practice Mode"
+setting_botplay: "Botplay"
+
+gameplay_menu: "Gameplay Settings"
+graphics_menu: "Graphic Settings"
+visuals_menu: "Visual Settings"
+
+setting_low_quality: "저퀄"
+description_low_quality: "눈에 띄지않게 최적화합니다."
+
+setting_anti-aliasing: "안티에일리징"
+description_anti-aliasing: "선에 생기는 계단 현상을 제거합니다."
+
+setting_shaders: "쉐이더"
+description_shaders: "쉐이더를 씁니다.\n이 모드 쉐이더 없으면 저퀄로 보이니까 끄지마ㅏㅏ"
+
+setting_gpu_caching: "GPU 캐싱"
+description_gpu_caching: "GPU에 그래픽을 캐싱합니다"
+
+setting_framerate: "프레임레이트"
+description_framerate: "Pretty self explanatory, isn't it?"
+
+setting_note_skins: "노트 스킨:"
+description_note_skins: "Select your prefered Note skin."
+
+setting_note_splashes: "노트 스플래시:"
+description_note_splashes: "Select your prefered Note Splash variation or turn it off."
+
+setting_note_splash_opacity: "Note Splash Opacity"
+description_note_splash_opacity: "How much transparent should the Note Splashes be."
+
+setting_hide_hud: "HUD 가리기"
+description_hide_hud: "If checked, hides most HUD elements."
+
+setting_time_bar: "타임 바:"
+description_time_bar: "What should the Time Bar display?"
+
+setting_flashing_lights: "반짝이는 빛"
+description_flashing_lights: "Uncheck this if you're sensitive to flashing lights!"
+
+setting_camera_zooms: "카메라 줌"
+description_camera_zooms: "If unchecked, the camera won't zoom in on a beat hit."
+
+setting_score_text_grow_on_hit: "Score Text Grow on Hit"
+description_score_text_grow_on_hit: "If unchecked, disables the Score text growing\nevery time you hit a note."
+
+setting_health_bar_opacity: "Health Bar Opacity"
+description_health_bar_opacity: "How much transparent should the health bar and icons be."
+
+setting_fps_counter: "FPS Counter"
+description_fps_counter: "If unchecked, hides FPS Counter."
+
+setting_pause_music: "일시정지 화면 음악:"
+description_pause_music: "What song do you prefer for the Pause Screen?"
+
+setting_discord_rich_presence: "Discord Rich Presence"
+description_discord_rich_presence: "Uncheck this to prevent accidental leaks, it will hide the Application from your \"Playing\" box on Discord"
+
+setting_combo_stacking: "Combo Stacking"
+description_combo_stacking: "If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read"
+
+setting_downscroll: "다운스크롤"
+description_downscroll: "If checked, notes go Down instead of Up, simple enough."
+
+setting_middlescroll: "미들스크롤"
+description_middlescroll: "If checked, your notes get centered."
+
+setting_opponent_notes: "적 노트"
+description_opponent_notes: "If unchecked, opponent notes get hidden."
+
+setting_ghost_tapping: "고스트 태핑"
+description_ghost_tapping: "If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit."
+
+setting_auto_pause: "Auto Pause"
+description_auto_pause: "If checked, the game automatically pauses if the screen isn't on focus."
+
+setting_disable_reset_button: "Disable Reset Button"
+description_disable_reset_button: "If checked, pressing Reset won't do anything."
+
+setting_hitsound_volume: "Hitsound Volume"
+description_hitsound_volume: "Funny notes go \"Tick!\" when you hit them."
+
+setting_rating_offset: "Rating Offset"
+description_rating_offset: "Changes how late/early you have to hit for a \"Sick!\"\nHigher values mean you have to hit later."
+
+setting_sick_hit_window: "Sick! Hit Window"
+description_sick_hit_window: "Changes the amount of time you have\nfor hitting a \"Sick!\" in milliseconds."
+
+setting_good_hit_window: "Good Hit Window"
+description_good_hit_window: "Changes the amount of time you have\nfor hitting a \"Good\" in milliseconds."
+
+setting_bad_hit_window: "Bad Hit Window"
+description_bad_hit_window: "Changes the amount of time you have\nfor hitting a \"Bad\" in milliseconds."
+
+setting_safe_frames: "Safe Frames"
+description_safe_frames: "Changes how many frames you have for\nhitting a note earlier or late."
+
+setting_sustains_as_one_note: "Sustains as One Note"
+description_sustains_as_one_note: "If checked, Hold Notes can't be pressed if you miss,\nand count as a single Hit/Miss.\nUncheck this if you prefer the old Input System."
+
+// Control Rebinding
+controls_rebinding: "Rebinding {1}"
+controls_rebinding2: "Hold ESC to Cancel\nHold Backspace to Delete"
+
+keygroup_NOTES: "노트"
+key_note_left: "왼쪽"
+key_note_down: "아래"
+key_note_up: "위"
+key_note_right: "오른쪽"
+
+keygroup_UI: "UI"
+key_ui_left: "왼쪽"
+key_ui_down: "아래"
+key_ui_up: "위"
+key_ui_right: "오른쪽"
+key_reset: "전체 초기화"
+key_accept: "플레이/확인"
+key_back: "돌아가기"
+key_pause: "멈추기"
+
+keygroup_VOLUME: "음량"
+key_volume_mute: "음소거"
+key_volume_up: "올려!"
+key_volume_down: "내려!"
+
+keygroup_DEBUG: "디버그"
+key_debug_1: "차트"
+key_debug_2: "캐릭터"
+
+delay_beat_hit: "Beat Hit!"
+combo_rating_offset: "Rating Offset:"
+combo_numbers_offset: "Numbers Offset:"
+delay_current_offset: "Current offset: {1} ms"
+combo_offset: "Combo Offset"
+note_delay: "Note/Beat Delay"
+switch_on_accept: "(Press Accept to Switch)"
+switch_on_start: "(Press Start to Switch)"
+
+note_colors_tip: "Press RESET to Reset the selected Note Part."
+note_colors_shift: "Shift"
+note_colors_lb: "Left Shoulder Button"
+note_colors_hold_tip: "Hold {1} + Press RESET key to fully reset the selected Note."
+
+options_note_colors: "노트색깔"
+options_controls: "컨트롤"
+options_adjust_delay_and_combo: "비트/콤보 딜레이"
+options_graphics: "그래픽"
+options_visuals: "시각"
+options_gameplay: "게임 플레이"
+options_language: "언어"
+
+reset_achievement: "미션 초기화: "
+
+yes: "네"
+no: "아니요"
+
+freeplay_tip: "스페이스 / 엔터를 눌러 곡 플레이! 위, 아래로 내려서 곡 선택 가능! 재밌게 플레이해보자! 기록을 갱신해보자!"
+personal_best: "개인 최고기록: {1} ({2}%)"
+
+now_loading: "로딩중임"
+
+reload_button: "재로드"
+enable_all_button: "다 켜버리기"
+disable_all_button: "다 꺼버리기"
+no_mods_installed: "모드가 없어요\냥코 모드가 없으면 정상이 아닌데?\불법 사이트에서 받았어요?"
+no_mods_found: "모드를 못찾겠는데요"
+mod_restart: "* Moving or Toggling On/Off this Mod will restart the game."
+
+botplay: "Botplay"
+
+rating_you_suck: "원숭이가 쳐도 니보다 잘침"
+rating_shit: "더럽게 못하네"
+rating_bad: "못한다"
+rating_bruh: "막누름?"
+rating_meh: "좀 못한다"
+rating_nice: "좀만 더.."
+rating_good: "힘내"
+rating_great: "아쉽냐"
+rating_sick: "잘하네~"
+rating_perfect: "이거 백퍼 사람 아니다"
+
+clear: "깼네"
+sdcb: "잘한다"
+fc: "풀콤보!"
+gfc: "겁나 잘하네 ㄷㄷㄷ"
+sfc: "알 유 치터?"
+
+score_text: "점수: {1} | 틀림: {2} | 정확도: {3}"
+score_text_instakill: "점수: {1} | 정확도: {2}"
+
+week_score: "점수: {1}"
+
+blueballed: "ㄷ짐: {1}"
+practice_mode: "연습 모드"
+charting_mode: "차팅 모드"
+
+pause_resume: "플레이"
+pause_restart_song: "곡 재시작"
+pause_change_difficulty: "난이도 변경"
+pause_options: "설정"
+pause_exit_to_menu: "나가기"
+
+reset_score: "Reset the score of"
+
+// Achievements
+achievement_: ""
+description_: ""
+
+achievement_friday_night_play: "Friday night에 Friday night funkin 플레이하기"
+description_friday_night_play: "금요일 밤에.... 플레이하기."
+
+achievement_ur_bad: "이게 뭔 재앙이냐?"
+description_ur_bad: "정확도 20%보다 더 떨어지게 곡 끝내기"
+
+achievement_ur_good: "완벽주의자"
+description_ur_good: "100% 정확도로 곡 끝내기"
+
+achievement_oversinging: "과도한 발성...??"
+description_oversinging: "기본 상태로 안 돌아가고 10초동안 화살표 누르고 있기"
+
+achievement_hype: "하이퍼랙티브"
+description_hype: "노래부르는 상태에서 곡 끝내기"
+
+achievement_two_keys: "그저 두개의 우리"
+description_two_keys: "두 개의 키를 누른 상태에서 곡 끝내기"
+
+// mainmenu 설정
+images/mainmenu/menu_story_mode: "images/ko-KR/mainmenu/menu_story_mode"
+images/mainmenu/menu_freeplay: "images/ko-KR/mainmenu/menu_freeplay"
+images/mainmenu/menu_mods: "images/ko-KR/mainmenu/menu_mods"
+images/mainmenu/menu_achievements: "images/ko-KR/mainmenu/menu_achievements"
+images/mainmenu/menu_options: "images/ko-KR/mainmenu/menu_options"
+images/mainmenu/menu_credits: "images/ko-KR/mainmenu/menu_credits"
+
+// 프리플레이
+images/freeplay/nyan-chapter1: "images/ko-KR/freeplay/nyan-chapter1"
+images/freeplay/nyan-chapter2: "images/ko-KR/freeplay/nyan-chapter2"
+images/freeplay/nyan-chapter3: "images/ko-KR/freeplay/nyan-chapter3"
+images/freeplay/double-attack-chapter1: "images/ko-KR/freeplay/double-attack-chapter1"
+images/freeplay/double-attack-chapter2: "images/ko-KR/freeplay/double-attack-chapter2"
+images/freeplay/double-attack-chapter3: "images/ko-KR/freeplay/double-attack-chapter3"
+images/freeplay/boss-chapter1: "images/ko-KR/freeplay/boss-chapter1"
+images/freeplay/boss-chapter2: "images/ko-KR/freeplay/boss-chapter2"
+images/freeplay/boss-chapter3: "images/ko-KR/freeplay/boss-chapter3"
+images/freeplay/identity-crisis-chapter1: "images/ko-KR/freeplay/identity-crisis-chapter1"
+images/freeplay/identity-crisis-chapter2: "images/ko-KR/freeplay/identity-crisis-chapter2"
+images/freeplay/identity-crisis-chapter3: "images/ko-KR/freeplay/identity-crisis-chapter3"
+images/freeplay/tutorial-ordinary: "images/ko-KR/freeplay/tutorial-ordinary"
+
+// 미래편
+images/freeplay/In-the-future-chapter1:"images/ko-KR/freeplay/In-the-future-chapter1"
+
+// 피코 믹스
+images/freeplay/boss-pico-pico: "images/ko-KR/freeplay/boss-pico-pico"
+
+// 프리플레이 UI
+images/freeplayUI/charSelectBtn: "images/ko-KR/freeplayUI/charSelectBtn"
+images/freeplayUI/battleStart: "images/ko-KR/freeplayUI/battleStart"
+
+// 프리플레이 난이도
+images/freeplayDiff/chapter1-true:"images/ko-KR/freeplayDiff/chapter1-true"
+images/freeplayDiff/chapter1-false:"images/ko-KR/freeplayDiff/chapter1-false"
+
+images/freeplayDiff/chapter2-true:"images/ko-KR/freeplayDiff/chapter2-true"
+images/freeplayDiff/chapter2-false:"images/ko-KR/freeplayDiff/chapter2-false"
+
+images/freeplayDiff/chapter3-true:"images/ko-KR/freeplayDiff/chapter3-true"
+images/freeplayDiff/chapter3-false:"images/ko-KR/freeplayDiff/chapter3-false"
+
+images/freeplayDiff/pico-true:"images/ko-KR/freeplayDiff/pico-true"
+images/freeplayDiff/pico-false:"images/ko-KR/freeplayDiff/pico-false"
+
+// 스토리모드
+images/storymenu/tutorial1: "images/ko-KR/storymenu/tutorial1"
+images/storymenu/world2: "images/ko-KR/storymenu/world2"
+images/storymenu/future3: "images/ko-KR/storymenu/future3"
+
+// 판정
+images/sick: "images/ko-KR/sick"
+images/good: "images/ko-KR/good"
+images/bad: "images/ko-KR/bad"
+images/shit: "images/ko-KR/shit"
+
+//옵션
+images/optionBG:"images/ko-KR/optionBG"
+images/options/language:"images/ko-KR/options/language"
+images/options/graphics:"images/ko-KR/options/graphics"
+images/options/gameplay:"images/ko-KR/options/gameplay"
+images/options/controls:"images/ko-KR/options/controls"

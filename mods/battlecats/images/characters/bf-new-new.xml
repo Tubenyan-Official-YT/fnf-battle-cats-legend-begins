@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bf-new-new.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="hey0000" x="0" y="0" width="577" height="602" frameX="2" frameY="2" frameWidth="573" frameHeight="598"/>
+	<SubTexture name="hey0001" x="577" y="0" width="577" height="602" frameX="2" frameY="2" frameWidth="573" frameHeight="598"/>
+	<SubTexture name="hey0002" x="1154" y="0" width="568" height="602" frameX="2" frameY="2" frameWidth="564" frameHeight="598"/>
+	<SubTexture name="SingUp0002" x="0" y="2415" width="437" height="608" frameX="2" frameY="2" frameWidth="433" frameHeight="604"/>
+	<SubTexture name="SingUp0003" x="2680" y="1198" width="429" height="623" frameX="2" frameY="2" frameWidth="425" frameHeight="619"/>
+	<SubTexture name="SingDown0003" x="1410" y="1815" width="498" height="493" frameX="2" frameY="2" frameWidth="494" frameHeight="489"/>
+	<SubTexture name="SingLeft0000" x="2680" y="0" width="451" height="599" frameX="2" frameY="2" frameWidth="447" frameHeight="595"/>
+	<SubTexture name="SingLeft0002" x="0" y="1815" width="459" height="600" frameX="2" frameY="2" frameWidth="455" frameHeight="596"/>
+	<SubTexture name="SingLeft0003" x="484" y="1204" width="477" height="599" frameX="2" frameY="2" frameWidth="473" frameHeight="595"/>
+	<SubTexture name="SingRight0001" x="2209" y="0" width="471" height="601" frameX="2" frameY="2" frameWidth="467" frameHeight="597"/>
+	<SubTexture name="SingRight0002" x="0" y="1204" width="484" height="611" frameX="2" frameY="2" frameWidth="480" frameHeight="607"/>
+	<SubTexture name="SingRight0003" x="1722" y="0" width="487" height="611" frameX="2" frameY="2" frameWidth="483" frameHeight="607"/>
+	<SubTexture name="SingUp0000" x="2209" y="601" width="454" height="610" frameX="2" frameY="2" frameWidth="450" frameHeight="606"/>
+	<SubTexture name="SingUp0001" x="459" y="1815" width="462" height="596" frameX="2" frameY="2" frameWidth="458" frameHeight="592"/>
+	<SubTexture name="idle0003" x="0" y="602" width="538" height="602" frameX="2" frameY="2" frameWidth="534" frameHeight="598"/>
+	<SubTexture name="SingDown0000" x="961" y="1204" width="506" height="555" frameX="2" frameY="2" frameWidth="502" frameHeight="551"/>
+	<SubTexture name="SingDown0001" x="1467" y="1204" width="488" height="529" frameX="2" frameY="2" frameWidth="484" frameHeight="525"/>
+	<SubTexture name="SingDown0002" x="921" y="1815" width="489" height="510" frameX="2" frameY="2" frameWidth="485" frameHeight="506"/>
+	<SubTexture name="SingLeft0001" x="437" y="2415" width="441" height="599" frameX="2" frameY="2" frameWidth="437" frameHeight="595"/>
+	<SubTexture name="SingRight0000" x="2680" y="599" width="449" height="599" frameX="2" frameY="2" frameWidth="445" frameHeight="595"/>
+	<SubTexture name="idle0001" x="1092" y="602" width="494" height="583" frameX="2" frameY="2" frameWidth="490" frameHeight="579"/>
+	<SubTexture name="idle0002" x="2209" y="1211" width="465" height="594" frameX="2" frameY="2" frameWidth="461" frameHeight="590"/>
+	<SubTexture name="idle0000" x="538" y="602" width="554" height="583" frameX="2" frameY="2" frameWidth="550" frameHeight="579"/>
+</TextureAtlas>

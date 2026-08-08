@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="logoBumpin.png">
+	<!-- Created using the Spritesheet and XML generator -->
+	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
+	<SubTexture name="Friday_Night_Funkin_-removebg-preview0000" x="0" y="0" width="578" height="310" frameX="-20" frameY="-51" frameWidth="612" frameHeight="408"/>
+</TextureAtlas>
