@@ -194,16 +194,16 @@ mod_restart: "* Moving or Toggling On/Off this Mod will restart the game."
 
 botplay: "Botplay"
 
-rating_you_suck: "원숭이가 쳐도 니보다 잘침"
-rating_shit: "더럽게 못하네"
-rating_bad: "못한다"
-rating_bruh: "막누름?"
-rating_meh: "좀 못한다"
-rating_nice: "좀만 더.."
-rating_good: "힘내"
-rating_great: "아쉽냐"
-rating_sick: "잘하네~"
-rating_perfect: "이거 백퍼 사람 아니다"
+are_you_playing_other_games: "원숭이가 쳐도 니보다 잘침"
+what_are_you_doing_lol: "더럽게 못하네"
+very_bad: "못한다"
+bad: "막누름?"
+not_good: "좀 못한다"
+just_bit_more: "좀만 더.."
+you_can_this_better: "힘내"
+not_bad: "아쉽냐"
+good: "잘하네~"
+cheater!!!!!: "이 cheating을 cheating해서 깬 사람아 정정당당하게 좀 해!!!!"
 
 clear: "깼네"
 sdcb: "잘한다"
@@ -275,6 +275,7 @@ images/freeplay/tutorial-ordinary: "images/ko-KR/freeplay/tutorial-ordinary"
 
 // 미래편
 images/freeplay/In-the-future-chapter1:"images/ko-KR/freeplay/In-the-future-chapter1"
+images/freeplay/ailen-rush-chapter1:"images/ko-KR/freeplay/ailen-rush-chapter1"
 
 // 피코 믹스
 images/freeplay/boss-pico-pico: "images/ko-KR/freeplay/boss-pico-pico"

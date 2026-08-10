@@ -1,52 +1,84 @@
 {
 	"animations": [
 		{
-			"offsets": [82, 0],
+			"offsets": [102, 5],
+			"loop": false,
+			"fps": 12,
+			"anim": "hey",
+			"indices": [],
+			"name": "hey"
+		},
+		{
+			"loop": false,
+			"offsets": [20, 20],
+			"anim": "singLEFTmiss",
+			"fps": 16,
+			"name": "SingLeftmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, -20],
+			"anim": "singDOWNmiss",
+			"fps": 16,
+			"name": "SingDownmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 50],
+			"anim": "singUPmiss",
+			"fps": 16,
+			"name": "SingUpmiss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [-50, 0],
+			"anim": "singRIGHTmiss",
+			"fps": 16,
+			"name": "SingRightmiss",
+			"indices": []
+		},
+		{
+			"offsets": [10, 4],
+			"loop": false,
+			"fps": 12,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "Sing_Left"
+		},
+		{
+			"offsets": [-5, -7],
+			"loop": false,
+			"fps": 12,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "Sing_Right"
+		},
+		{
+			"offsets": [14, 47],
+			"loop": false,
+			"fps": 12,
+			"anim": "singUP",
+			"indices": [],
+			"name": "Sing_Up"
+		},
+		{
+			"offsets": [51, -71],
+			"loop": false,
+			"fps": 12,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "Sing_Down"
+		},
+		{
+			"offsets": [72, 0],
 			"indices": [],
 			"fps": 12,
 			"anim": "idle",
 			"loop": false,
-			"name": "idle"
-		},
-		{
-			"offsets": [102, 5],
-			"indices": [],
-			"fps": 12,
-			"anim": "hey",
-			"loop": false,
-			"name": "hey"
-		},
-		{
-			"offsets": [10, 4],
-			"indices": [],
-			"fps": 12,
-			"anim": "singLEFT",
-			"loop": false,
-			"name": "SingLeft"
-		},
-		{
-			"offsets": [-5, -7],
-			"indices": [],
-			"fps": 12,
-			"anim": "singRIGHT",
-			"loop": false,
-			"name": "SingRight"
-		},
-		{
-			"offsets": [14, 47],
-			"indices": [],
-			"fps": 12,
-			"anim": "singUP",
-			"loop": false,
-			"name": "SingUp"
-		},
-		{
-			"offsets": [51, -71],
-			"indices": [],
-			"fps": 12,
-			"anim": "singDOWN",
-			"loop": false,
-			"name": "SingDown"
+			"name": "_idle"
 		}
 	],
 	"vocals_file": "",

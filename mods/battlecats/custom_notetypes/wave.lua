@@ -31,10 +31,9 @@ end
 function goodNoteHit(id, noteData, noteType, isSustainNote)
     if noteType == 'wave' then
         -- 1. 체력 감소 및 화면 흔들림
-        setProperty('health', getProperty('health') - 0.3)
         cameraShake('game', 0.02, 0.5)
         cameraShake('hud', 0.01, 0.3)
-        cameraFlash('hud', '87CEEB', 3, true)
+        cameraFlash('hud', '87CEEB', 0.7, true)
 		
 		
         -- 2. 미스 횟수 증가 및 콤보/정확도 보정
