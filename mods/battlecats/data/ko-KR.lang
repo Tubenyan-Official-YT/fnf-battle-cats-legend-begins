@@ -300,9 +300,9 @@ images/freeplayDiff/pico-true:"images/ko-KR/freeplayDiff/pico-true"
 images/freeplayDiff/pico-false:"images/ko-KR/freeplayDiff/pico-false"
 
 // 스토리모드
-images/storymenu/tutorial1: "images/ko-KR/storymenu/tutorial1"
-images/storymenu/world2: "images/ko-KR/storymenu/world2"
-images/storymenu/future3: "images/ko-KR/storymenu/future3"
+images/storymenu/1tutorial1: "images/ko-KR/storymenu/1tutorial1"
+images/storymenu/2world2: "images/ko-KR/storymenu/2world2"
+images/storymenu/3future3: "images/ko-KR/storymenu/3future3"
 
 // 판정
 images/sick: "images/ko-KR/sick"
