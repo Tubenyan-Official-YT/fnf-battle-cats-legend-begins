@@ -1,468 +1,109 @@
--------- READ THIS NOTE! --------
--- dont steal my code you idiot ~VikryFX
--- this script free to use, but do not admit that YOU created this script
--- if you want to showcase it, do not give the link download, but give they link to my ManiaCat video
+-------- ManiaCat (최적화 버전 v2) --------
+-- 원본 문제: onUpdate()에서 매 프레임 makeLuaSprite() 호출 → 1초에 60번 이미지 로드 → FPS 폭락
+-- v1 문제: 토글 끌 때 visible=false로 숨기기만 함 → 스프라이트 객체가 살아있어 비용 남음
+-- v2 수정: 토글 끌 때 스프라이트를 완전 삭제(destroy), 켤 때 재생성 → 끄면 "삭제"랑 동일하게 60fps
 
--------- CHANGE CONTROLS --------
--- this is only for keyboard controls user, for touch screen ignore this
-local leftkey = 'left'
-local downkey = 'down'
-local upkey = 'up'
+-------- 조작키 (키보드) --------
+local leftkey  = 'left'
+local downkey  = 'down'
+local upkey    = 'up'
 local rightkey = 'right'
 
--------- CHANGE SKIN --------
-local skincat = 'BF'
+-------- 마니아캣 켜기/끄기 토글 키 --------
+-- 게임 플레이 중 이 키를 누르면 마니아캣이 켜졌다 꺼졌다 함
+-- 끄면 스프라이트를 완전히 삭제해서 성능 100% 복구
+local toggleKey = 'FIVE'
 
--------- ALL AVAILABLE SKIN --------
--- Default
--- BF
--- GF
--- Custom
+-------- 스킨 선택 --------
+local skincat = 'Default'  -- Default / BF / GF / Custom
 
--------- CHANGE POSITION OR SCALE --------
-local ycat = 300 -- change y position maniacat
-local xcat = 0 -- change x position 
-local scalecat = 0.2 -- change scale maniacat (default 0.2)
+-------- 위치 / 크기 --------
+local ycat = 300
+local xcat = 0
+local scalecat = 0.2
 
--------- PRESET YOU CAN USE FOR THE POSITION! --------
--- ATTENTION! this preset compatible if scalecat is 0.2 (except up left corner)
+-- ----- 이하 코드 (건드릴 필요 없음) ----- --
 
--- MIDDLE LEFT (default)
--- local ycat = 300
--- locat xcat = 0
+local dirSprites = {
+    'base', 'up', 'down', 'left', 'right',
+    'upright', 'leftdown', 'base_left', 'base_right'
+}
 
--- MIDDLE RIGHT
--- local ycat = 300
--- locat xcat = 1045
+local catVisible = true
+local spritesCreated = false
 
--- MIDDLE UP
--- local ycat = 520
--- locat xcat = 0
+-- 스프라이트 생성 (1회)
+function createCatSprites()
+    if spritesCreated then return end
+    local p = 'ManiaCat/' .. string.lower(skincat) .. '/'
+    for _, s in ipairs(dirSprites) do
+        makeLuaSprite(s, p .. s, xcat, ycat)
+        setObjectCamera(s, 'other')
+        scaleObject(s, scalecat, scalecat)
+        addLuaSprite(s, true)
+        setProperty(s .. '.visible', false)
+    end
+    setProperty('base.visible', true)
+    spritesCreated = true
+end
 
--- MIDDLE BOTTOM 
--- local ycat = 585
--- locat xcat = 520
+-- 스프라이트 완전 삭제 (성능 100% 복구)
+function destroyCatSprites()
+    if not spritesCreated then return end
+    for _, s in ipairs(dirSprites) do
+        removeLuaSprite(s, true)  -- true = 객체까지 destroy
+    end
+    spritesCreated = false
+end
 
--- UP LEFT CORNER
--- local ycat = 0
--- locat xcat = 0
+function onCreatePost()
+    if catVisible then
+        createCatSprites()
+    end
+end
 
--- BOTTOM LEFT CORNER
--- local ycat = 585
--- locat xcat = 0
-
--- UP RIGHT CORNER
--- local ycat = 0
--- locat xcat = 1045
-
--- BOTTOM RIGHT CORNER
--- local ycat = 585
--- locat xcat = 1045
-
--------- THE CODE! DO NOT TOUCH IT YOU SUCH DUMB AF --------
 function onUpdate()
- if skincat == 'Default' then
-  makeLuaSprite('base', 'ManiaCat/default/base', xcat, ycat);
-  addLuaSprite('base', true)
-  setObjectCamera('base', 'other')
-  scaleObject('base', scalecat, scalecat)
-    if keyPressed(upkey) then
-        makeLuaSprite('up', 'ManiaCat/default/up', xcat, ycat);
-        setObjectCamera('up', 'other')
-        scaleObject('up', scalecat, scalecat)
-        addLuaSprite('up', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/default/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('up', true)
+    -- 토글 키 처리 (누른 순간 1회만)
+    if keyboardJustPressed(toggleKey) then
+        catVisible = not catVisible
+        if catVisible then
+            createCatSprites()
+        else
+            destroyCatSprites()
+        end
     end
-    if keyPressed(downkey) then
-       removeLuaSprite('base_left', true)
-        makeLuaSprite('down', 'ManiaCat/default/down', xcat, ycat);
-        setObjectCamera('down', 'other')
-        scaleObject('down', scalecat, scalecat)
-        addLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/default/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('down', true)
+
+    -- 꺼져 있으면(스프라이트 없으면) 아무것도 안 함 → 성능 100% 복구
+    if not spritesCreated then return end
+
+    local u = keyPressed(upkey)
+    local d = keyPressed(downkey)
+    local l = keyPressed(leftkey)
+    local r = keyPressed(rightkey)
+
+    -- base(몸통)는 항상 보이기
+    setProperty('base.visible', true)
+
+    -- 방향 결정 (우선순위: 대각선 > 단일 방향 > idle)
+    local show
+    if     u and r then show = 'upright'
+    elseif l and d then show = 'leftdown'
+    elseif u       then show = 'up'
+    elseif d       then show = 'down'
+    elseif l       then show = 'left'
+    elseif r       then show = 'right'
+    else                show = 'base_right'
     end
-    if keyPressed(leftkey) then
-       makeLuaSprite('left', 'ManiaCat/default/left', xcat, ycat);
-        setObjectCamera('left', 'other')
-        scaleObject('left', scalecat, scalecat)
-        addLuaSprite('left', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/default/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('left', true)
+
+    -- base 외 스프라이트는 show 에 해당하는 것만 노출
+    for _, s in ipairs(dirSprites) do
+        if s ~= 'base' then
+            setProperty(s .. '.visible', s == show)
+        end
     end
-    if keyPressed(rightkey) then
-       makeLuaSprite('right', 'ManiaCat/default/right', xcat, ycat);
-        setObjectCamera('right', 'other')
-        scaleObject('right', scalecat, scalecat)
-        addLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/default/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('right', true)
-    end
-    if keyPressed(upkey) and keyPressed(rightkey) then
-        makeLuaSprite('upright', 'ManiaCat/default/upright', xcat, ycat);
-        setObjectCamera('upright', 'other')
-        scaleObject('upright', scalecat, scalecat)
-        addLuaSprite('upright', true)
-        removeLuaSprite('up', true)
-        removeLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/default/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('upright', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        makeLuaSprite('leftdown', 'ManiaCat/default/leftdown', xcat, ycat);
-        setObjectCamera('leftdown', 'other')
-        scaleObject('leftdown', scalecat, scalecat)
-        addLuaSprite('leftdown', true)
-        removeLuaSprite('left', true)
-        removeLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/default/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('leftdown', true)
-    end
-    if keyPressed(leftkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(rightkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(rightkey) and keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-  end
-   if skincat == 'GF' then
-  makeLuaSprite('base', 'ManiaCat/gf/base', xcat, ycat);
-  addLuaSprite('base', true)
-  setObjectCamera('base', 'other')
-  scaleObject('base', scalecat, scalecat)
-    if keyPressed(upkey) then
-        makeLuaSprite('up', 'ManiaCat/gf/up', xcat, ycat);
-        setObjectCamera('up', 'other')
-        scaleObject('up', scalecat, scalecat)
-        addLuaSprite('up', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/gf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('up', true)
-    end
-    if keyPressed(downkey) then
-       removeLuaSprite('base_left', true)
-        makeLuaSprite('down', 'ManiaCat/gf/down', xcat, ycat);
-        setObjectCamera('down', 'other')
-        scaleObject('down', scalecat, scalecat)
-        addLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/gf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('down', true)
-    end
-    if keyPressed(leftkey) then
-       makeLuaSprite('left', 'ManiaCat/gf/left', xcat, ycat);
-        setObjectCamera('left', 'other')
-        scaleObject('left', scalecat, scalecat)
-        addLuaSprite('left', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/gf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('left', true)
-    end
-    if keyPressed(rightkey) then
-       makeLuaSprite('right', 'ManiaCat/gf/right', xcat, ycat);
-        setObjectCamera('right', 'other')
-        scaleObject('right', scalecat, scalecat)
-        addLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/gf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('right', true)
-    end
-    if keyPressed(upkey) and keyPressed(rightkey) then
-        makeLuaSprite('upright', 'ManiaCat/gf/upright', xcat, ycat);
-        setObjectCamera('upright', 'other')
-        scaleObject('upright', scalecat, scalecat)
-        addLuaSprite('upright', true)
-        removeLuaSprite('up', true)
-        removeLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/gf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('upright', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        makeLuaSprite('leftdown', 'ManiaCat/gf/leftdown', xcat, ycat);
-        setObjectCamera('leftdown', 'other')
-        scaleObject('leftdown', scalecat, scalecat)
-        addLuaSprite('leftdown', true)
-        removeLuaSprite('left', true)
-        removeLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/gf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('leftdown', true)
-    end
-    if keyPressed(leftkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(rightkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(rightkey) and keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-  end
-   if skincat == 'BF' then
-  makeLuaSprite('base', 'ManiaCat/bf/base', xcat, ycat);
-  addLuaSprite('base', true)
-  setObjectCamera('base', 'other')
-  scaleObject('base', scalecat, scalecat)
-    if keyPressed(upkey) then
-        makeLuaSprite('up', 'ManiaCat/bf/up', xcat, ycat);
-        setObjectCamera('up', 'other')
-        scaleObject('up', scalecat, scalecat)
-        addLuaSprite('up', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/bf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('up', true)
-    end
-    if keyPressed(downkey) then
-       removeLuaSprite('base_left', true)
-        makeLuaSprite('down', 'ManiaCat/bf/down', xcat, ycat);
-        setObjectCamera('down', 'other')
-        scaleObject('down', scalecat, scalecat)
-        addLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/bf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('down', true)
-    end
-    if keyPressed(leftkey) then
-       makeLuaSprite('left', 'ManiaCat/bf/left', xcat, ycat);
-        setObjectCamera('left', 'other')
-        scaleObject('left', scalecat, scalecat)
-        addLuaSprite('left', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/bf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('left', true)
-    end
-    if keyPressed(rightkey) then
-       makeLuaSprite('right', 'ManiaCat/bf/right', xcat, ycat);
-        setObjectCamera('right', 'other')
-        scaleObject('right', scalecat, scalecat)
-        addLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/bf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('right', true)
-    end
-    if keyPressed(upkey) and keyPressed(rightkey) then
-        makeLuaSprite('upright', 'ManiaCat/bf/upright', xcat, ycat);
-        setObjectCamera('upright', 'other')
-        scaleObject('upright', scalecat, scalecat)
-        addLuaSprite('upright', true)
-        removeLuaSprite('up', true)
-        removeLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/bf/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('upright', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        makeLuaSprite('leftdown', 'ManiaCat/bf/leftdown', xcat, ycat);
-        setObjectCamera('leftdown', 'other')
-        scaleObject('leftdown', scalecat, scalecat)
-        addLuaSprite('leftdown', true)
-        removeLuaSprite('left', true)
-        removeLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/bf/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('leftdown', true)
-    end
-    if keyPressed(leftkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(rightkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(rightkey) and keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-   if skincat == 'Custom' then
-  makeLuaSprite('base', 'ManiaCat/custom/base', xcat, ycat);
-  addLuaSprite('base', true)
-  setObjectCamera('base', 'other')
-  scaleObject('base', scalecat, scalecat)
-    if keyPressed(upkey) then
-        makeLuaSprite('up', 'ManiaCat/custom/up', xcat, ycat);
-        setObjectCamera('up', 'other')
-        scaleObject('up', scalecat, scalecat)
-        addLuaSprite('up', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/custom/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('up', true)
-    end
-    if keyPressed(downkey) then
-       removeLuaSprite('base_left', true)
-        makeLuaSprite('down', 'ManiaCat/custom/down', xcat, ycat);
-        setObjectCamera('down', 'other')
-        scaleObject('down', scalecat, scalecat)
-        addLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/custom/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('down', true)
-    end
-    if keyPressed(leftkey) then
-       makeLuaSprite('left', 'ManiaCat/custom/left', xcat, ycat);
-        setObjectCamera('left', 'other')
-        scaleObject('left', scalecat, scalecat)
-        addLuaSprite('left', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/custom/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('left', true)
-    end
-    if keyPressed(rightkey) then
-       makeLuaSprite('right', 'ManiaCat/custom/right', xcat, ycat);
-        setObjectCamera('right', 'other')
-        scaleObject('right', scalecat, scalecat)
-        addLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/custom/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('right', true)
-    end
-    if keyPressed(upkey) and keyPressed(rightkey) then
-        makeLuaSprite('upright', 'ManiaCat/custom/upright', xcat, ycat);
-        setObjectCamera('upright', 'other')
-        scaleObject('upright', scalecat, scalecat)
-        addLuaSprite('upright', true)
-        removeLuaSprite('up', true)
-        removeLuaSprite('right', true)
-    else
-        makeLuaSprite('base_right', 'ManiaCat/custom/base_right', xcat, ycat);
-        setObjectCamera('base_right', 'other')
-        scaleObject('base_right', scalecat, scalecat)
-        addLuaSprite('base_right', true)
-        removeLuaSprite('upright', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        makeLuaSprite('leftdown', 'ManiaCat/custom/leftdown', xcat, ycat);
-        setObjectCamera('leftdown', 'other')
-        scaleObject('leftdown', scalecat, scalecat)
-        addLuaSprite('leftdown', true)
-        removeLuaSprite('left', true)
-        removeLuaSprite('down', true)
-    else
-        makeLuaSprite('base_left', 'ManiaCat/custom/base_left', xcat, ycat);
-        setObjectCamera('base_left', 'other')
-        scaleObject('base_left', scalecat, scalecat)
-        addLuaSprite('base_left', true)
-        removeLuaSprite('leftdown', true)
-    end
-    if keyPressed(leftkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(rightkey) then
-        removeLuaSprite('base_right', true)
-    end
-    if keyPressed(leftkey) and keyPressed(downkey) then
-        removeLuaSprite('base_left', true)
-    end
-    if keyPressed(rightkey) and keyPressed(upkey) then
-        removeLuaSprite('base_right', true)
-   end
-  end
- end
+end
+
+-- 곡 끝나면 혹시 남은 스프라이트 정리
+function onDestroy()
+    destroyCatSprites()
 end
