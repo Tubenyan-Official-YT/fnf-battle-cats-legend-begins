@@ -1,7 +1,9 @@
 Korean (South Korea)
 
 // Difficulties
-difficulty_: ""
+difficulty_chapter1: "1장"
+difficulty_chapter2: "2장"
+difficulty_chapter3: "3장"
 
 difficulty_easy: "쉬움"
 difficulty_normal: "중간"
@@ -314,6 +316,7 @@ images/options/language:"images/ko-KR/options/language"
 images/options/graphics:"images/ko-KR/options/graphics"
 images/options/gameplay:"images/ko-KR/options/gameplay"
 images/options/controls:"images/ko-KR/options/controls"
+
 // Subtitles (show subtitle event)
 Oh, you have to brush a tooth: "아 입냄새나;;;;"
 Do you want to die?: "뒤질래?"
