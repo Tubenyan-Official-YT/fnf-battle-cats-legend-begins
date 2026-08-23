@@ -316,3 +316,6 @@ images/options/language:"images/ko-KR/options/language"
 images/options/graphics:"images/ko-KR/options/graphics"
 images/options/gameplay:"images/ko-KR/options/gameplay"
 images/options/controls:"images/ko-KR/options/controls"
+
+// 캐릭선택
+images/charNames/bf: "images/ko-KR/charNames/bf"
