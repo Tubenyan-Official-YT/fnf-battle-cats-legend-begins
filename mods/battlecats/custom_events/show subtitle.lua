@@ -35,8 +35,7 @@ function onEvent(name, value1, value2, strumTime)
 		else
 			setProperty('BG.visible', true)
 			setProperty('subText.visible', true)
-			-- 번역: lang 파일에 키가 있으면 번역, 없으면 원문 그대로
-			setProperty('subText.text', getTranslationPhrase(value1, value1))
+			setProperty('subText.text', value1)
 			screenCenter('subText', 'x')
 			setProperty("subText.y", getProperty("BG.y") + (getProperty("BG.height") - getProperty("subText.height")) / 2)
 			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.001)
