@@ -1,3 +1,3 @@
-function onSongEnd()
-	addMaxEnergy(30)
+function onEndSong()
+	addMaxEnergy(20)
 end
