@@ -107,3 +107,9 @@ end
 function onDestroy()
     destroyCatSprites()
 end
+
+function onCustomSubstateCreate(name)
+    if name == 'victory' then
+        destroyCatSprites()
+    end
+end

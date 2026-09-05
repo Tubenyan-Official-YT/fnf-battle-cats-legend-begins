@@ -1,10 +1,12 @@
 import backend.Highscore;
 
-setVar('rewards', []);
-setVar('isFirst', Highscore.getScore(loadedSongName, difficulty) <= 0)
 var rewardTxt:String = '';
 var victoryDone:Bool = false;
 
+function onCreate() {
+	setVar('rewards', []);
+	setVar('isFirst', Highscore.getScore(PlayState.instance.loadedSongName, PlayState.instance.difficulty) <= 0);
+}
 
 function onEndSong() {
 	if (victoryDone) return;
@@ -24,8 +26,10 @@ function onCustomSubstateCreate(name:String) {
 	var mySprite:FlxSprite = new FlxSprite(0, 0);
 	mySprite.loadGraphic(Paths.image('endsong/win'));
 	mySprite.screenCenter();
-	mySprite.y -= 100;
+	mySprite.y -= 150;
 	customSubstate.add(mySprite);
+	
+	destroyCatSprites()
 	
 	var xpTextBar:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('endsong/xpTextBar')).screenCenter();
 	customSubstate.add(xpTextBar);
