@@ -1,7 +1,10 @@
+import backend.Highscore;
+
 setVar('rewards', []);
-var rewards:Array<String> = getVar('rewards');
+setVar('isFirst', Highscore.getScore(loadedSongName, difficulty) <= 0)
 var rewardTxt:String = '';
 var victoryDone:Bool = false;
+
 
 function onEndSong() {
 	if (victoryDone) return;
@@ -11,16 +14,25 @@ function onEndSong() {
 }
 
 function onCustomSubstateCreate(name:String) {
+	camGame.stopFX();
+	camHUD.stopFX();
+	camOther.stopFX();
+	
 	if (name != 'victory') return;
+	camHUD.visible = false;
 
 	var mySprite:FlxSprite = new FlxSprite(0, 0);
 	mySprite.loadGraphic(Paths.image('endsong/win'));
-	mySprite.screenCenter(); // 완전승리
+	mySprite.screenCenter();
 	mySprite.y -= 100;
 	customSubstate.add(mySprite);
+	
+	var xpTextBar:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('endsong/xpTextBar')).screenCenter();
+	customSubstate.add(xpTextBar);
 
+	var rewards:Array<String> = getVar('rewards'); // 여기서 매번 새로 읽어야 최신값 반영됨
 
-	if (rewards.length > 0) {
+	if (rewards != null && rewards.length > 0) {
 		var step:Int = 0;
 		for (reward in rewards) {
 			rewardTxt += reward;
@@ -33,14 +45,16 @@ function onCustomSubstateCreate(name:String) {
 
 		var rewardBox:FlxSprite = new FlxSprite(0, 0);
 		rewardBox.loadGraphic(Paths.image('endsong/rewards'));
-		rewardBox.screenCenter(X);
+		rewardBox.x = (FlxG.width - rewardBox.width) / 2;
 		var h:Float = rewardBox.height;
 		rewardBox.y = FlxG.height * 0.75 - h / 2;
 		customSubstate.add(rewardBox);
 
-		var myText:FlxText = new FlxText(0, 300, 600, rewardTxt, 20);
-		myText.setFormat(Paths.font('title.otf'), 20, FlxColor.WHITE, CENTER);
+		var myText:FlxText = new FlxText(0, 0, FlxG.width, rewardTxt, 20);
+		myText.setFormat(Paths.font('title.otf'), 20, FlxColor.WHITE, "center");
+		myText.y = rewardBox.y + (h - myText.height) / 2; // 박스 세로 중앙
 		customSubstate.add(myText);
+
 	}
 }
 
