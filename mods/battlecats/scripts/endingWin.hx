@@ -29,8 +29,6 @@ function onCustomSubstateCreate(name:String) {
 	mySprite.y -= 150;
 	customSubstate.add(mySprite);
 	
-	destroyCatSprites()
-	
 	var xpTextBar:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('endsong/xpTextBar')).screenCenter();
 	customSubstate.add(xpTextBar);
 
