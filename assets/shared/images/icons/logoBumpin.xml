@@ -1,7 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="logoBumpin.png">
-	<!-- Psych Engine 1.0.4 High-Res -->
-	<SubTexture name="logo bumpin0000" x="0" y="0" width="688" height="384"/>
-	<SubTexture name="logo bumpin0001" x="688" y="0" width="688" height="384"/>
-	<SubTexture name="logo bumpin0002" x="0" y="384" width="688" height="384"/>
-</TextureAtlas>

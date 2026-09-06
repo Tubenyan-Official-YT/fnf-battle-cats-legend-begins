@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="menu_achievements.png">
+<TextureAtlas imagePath="menu_mission.png">
 	<!-- Created using the Spritesheet and XML generator -->
 	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
 	<SubTexture name="achievements selected0006" x="0" y="0" width="194" height="194" frameX="-22" frameY="-17" frameWidth="230" frameHeight="220"/>
