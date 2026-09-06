@@ -2,7 +2,7 @@
 <TextureAtlas imagePath="menu_charselect.png">
 	<!-- Created using the Spritesheet and XML generator -->
 	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="mods idle0000" x="0" y="0" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
-	<SubTexture name="mods selected0000" x="0" y="114" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
-	<SubTexture name="mods selected0001" x="0" y="228" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
+	<SubTexture name="charselect idle0000" x="0" y="0" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
+	<SubTexture name="charselect selected0000" x="0" y="114" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
+	<SubTexture name="charselect selected0001" x="0" y="228" width="453" height="114" frameX="1" frameY="-45" frameWidth="450" frameHeight="200"/>
 </TextureAtlas>
