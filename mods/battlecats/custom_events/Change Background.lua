@@ -7,7 +7,7 @@ local bgConfigs = {
     ['gris'] = {scale = 5, x = -1550, y = -1300, scroll = 1.0, zoom = 0.3, bfY = -500, dadY = -1000},
 	['desert'] = {scale = 2.5, x = -1700, y = -2000, scroll = 0.5, zoom = 0.4, bfY = 0, dadY = -200},
 	['moon'] = {scale = 1.8, x = -1100, y = -2000, scroll = 0.5, zoom = 0.4, bfY = 1000, dadY = 200},
-	['newmoon'] = {scale = 2.5, x = -1000, y = -600, scroll = 1.2, zoom = 0.4, bfY = 1000, dadY=500},
+	['newmoon'] = {scale = 2.5, x = -1000, y = -600, scroll = 1.2, zoom = 0.4, bfY = 100, dadY=500},
 	['white'] = {scale = 1, x = -500, y = 0, scroll = 1, zoom = 0.4,bfY =400,dadY = -100}
 }
 
@@ -63,7 +63,7 @@ function onEvent(name, value1, value2)
 				setProperty('boyfriend.x', 800)
 				setProperty('boyfriend.y', config.bfY)
 			else
-				setProperty('boyfriend.x', 1100)
+				setProperty('boyfriend.x', 800)
 				setProperty('boyfriend.y', config.bfY)
 			end
             

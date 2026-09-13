@@ -27,5 +27,7 @@ function onEndSong()
 		unlockAchievement('bunbun')
 	elseif songPath == 'future1' then
 		unlockAchievement('future1')
+	elseif songPath == 'future-moon' then
+		unlockAchievement('future-moon')]
 	end
 end

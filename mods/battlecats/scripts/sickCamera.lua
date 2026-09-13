@@ -3,7 +3,7 @@
 
 -- Camera Rotation settings
 local ag = 1.5
-local agSpeed = 0.25
+local agSpeed = 0.5
 
 -- Camera Movement settings
 local Intensity = 40;
@@ -115,10 +115,27 @@ function onUpdatePost()
 end
 
 -- Rotation triggers
+local baseOffset = 50 -- 기준 오프셋 수치
+
 function angle(d, m)
     if m == mustHitSection then
-        -- 0 = Left, 3 = Right
+        -- 1. 스테이지의 기본 줌 수치를 불러와서 보정된 이동량 계산
+        local zoom = getProperty('defaultCamZoom')
+        if zoom <= 0 then zoom = 1 end -- 0으로 나누기 방지
+        
+        -- 줌이 낮을수록 더 크게 움직이도록 역선형 보정
+        local moveOffset = baseOffset / zoom
+
+        -- 2. 기존 각도 회전
         doTweenAngle('camGameAngle', 'camGame', ag * (d == 0 and -1 or d == 3 and 1 or 0), agSpeed, 'linear')
+        
+        -- 3. 보정된 오프셋으로 방향별 좌표 계산
+        local targetX = (d == 0 and -moveOffset or (d == 3 and moveOffset or 0))
+        local targetY = (d == 1 and moveOffset or (d == 2 and -moveOffset or 0))
+        
+        -- 4. 카메라 오프셋 트윈 적용
+        doTweenX('camGameX', 'camGame.targetOffset', targetX, agSpeed, 'linear')
+        doTweenY('camGameY', 'camGame.targetOffset', targetY, agSpeed, 'linear')
     end
 end
 
