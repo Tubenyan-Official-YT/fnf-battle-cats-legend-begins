@@ -3,6 +3,7 @@ function onCreate()
     scaleObject('stageBackground2', 1.8, 1.8)
     setScrollFactor('stageBackground2', 0.5, 0.5)
     addLuaSprite('stageBackground2', false)
+    setVar('bgSpriteList', (getVar('bgSpriteList') or '') .. 'stageBackground2,')
 
     makeLuaSprite('darkShader', nil, -500, -500)
     makeGraphic('darkShader', screenWidth * 2, screenHeight * 2, '000000')
@@ -10,4 +11,5 @@ function onCreate()
     setScrollFactor('darkShader', 0, 0)
     setProperty('darkShader.alpha', 0.5)
     addLuaSprite('darkShader', true)
+    setVar('bgSpriteList', (getVar('bgSpriteList') or '') .. 'darkShader,')
 end

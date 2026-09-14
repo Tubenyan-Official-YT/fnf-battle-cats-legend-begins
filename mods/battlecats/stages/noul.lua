@@ -7,4 +7,5 @@ function onCreate()
 	setSpriteShader('noul_bg', 'RTXLighting')
 	
 	addLuaSprite('noul_bg', false); -- 캐릭터 뒤에 배치
+	setVar('bgSpriteList', (getVar('bgSpriteList') or '') .. 'noul_bg,')
 end

@@ -10,4 +10,5 @@ function onCreate()
     
     -- 스테이지에 배경을 배치합니다.
     addLuaSprite('stageBackground', false)
+    setVar('bgSpriteList', (getVar('bgSpriteList') or '') .. 'stageBackground,')
 end
