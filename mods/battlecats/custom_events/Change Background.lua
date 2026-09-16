@@ -12,7 +12,7 @@ local bgSpecs = {
     ['moon']    = {image = 'moon',    x = -1100, y = -2000, scale = 1.8, scroll = 0.5, darkShader = true,
                    zoom = 0.4, bfY = 1000, dadY = 200},
     ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.2,
-                   zoom = 0.4, bfY = -200, dadY = 500},
+                   zoom = 0.4, bfY = 400,  dadY = 500},
     ['white']   = {image = nil,       x = -2000, y = -2000, scale = 1,   scroll = 0, whiteFill = true,
                    zoom = 0.4, bfY = 400,  dadY = -100},
 }
