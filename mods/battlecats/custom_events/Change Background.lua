@@ -1,15 +1,23 @@
--- 배경별 위치/줌/특수효과만 담는 얇은 테이블 (이미지는 stages/*.lua가 담당)
-local bgMeta = {
-    ['noul']    = {zoom = 0.9, bfY = 450,  dadY = 450,  topMask = true},
-    ['night']   = {zoom = 0.6, bfY = 300,  dadY = 400,  topMask = true},
-    ['gris']    = {zoom = 0.3, bfY = -500, dadY = -1000, topMask = true},
-    ['desert']  = {zoom = 0.4, bfY = 0,    dadY = -200, topMask = true},
-    ['moon']    = {zoom = 0.4, bfY = 1000, dadY = 200,  topMask = true, darkShaderAlpha = 0.5},
-    ['newmoon'] = {zoom = 0.4, bfY = 100,  dadY = 500},
-    ['white']   = {zoom = 0.4, bfY = 400,  dadY = -100, whiteShader = true},
+-- 배경별 스펙: 전부 이 스크립트 안에서 직접 만들고, 만든 태그는 bgSpriteList에 등록.
+-- 스테이지 폴더 재사용(addLuaScript) 안 함 -> 곡 기본 stage랑 충돌 안 남.
+local bgSpecs = {
+    ['noul']    = {image = 'noul',    x = -650,  y = -450,  scale = 3,   scroll = 0.7, shader = true,
+                   zoom = 0.9, bfY = 450,  dadY = 450},
+    ['night']   = {image = 'night',   x = -1100, y = -800,  scale = 4,   scroll = 0.5,
+                   zoom = 0.6, bfY = 300,  dadY = 400},
+    ['gris']    = {image = 'gris',    x = -1550, y = -1300, scale = 5,   scroll = 1.0,
+                   zoom = 0.3, bfY = -500, dadY = -1000},
+    ['desert']  = {image = 'desert',  x = -1700, y = -2000, scale = 2.5, scroll = 0.5,
+                   zoom = 0.4, bfY = 0,    dadY = -200},
+    ['moon']    = {image = 'moon',    x = -1600, y = -2000, scale = 1.8, scroll = 0.5, darkShader = true,
+                   zoom = 0.4, bfY = 1000, dadY = 200},
+    ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.2,
+                   zoom = 0.4, bfY = 100,  dadY = 500},
+    ['white']   = {image = nil,       x = -2000, y = -2000, scale = 1,   scroll = 0, whiteFill = true,
+                   zoom = 0.4, bfY = 400,  dadY = -100},
 }
 
-local currentStage = nil
+local currentBG = nil
 
 function onCreate()
     setVar('bgSpriteList', '')
@@ -23,83 +31,65 @@ function clearBG()
         end
     end
     setVar('bgSpriteList', '')
+end
 
-    if luaSpriteExists('topMask') then removeLuaSprite('topMask', true) end
+function regSprite(tag)
+    setVar('bgSpriteList', (getVar('bgSpriteList') or '') .. tag .. ',')
 end
 
 function onEvent(name, value1, value2)
     if name ~= 'Change Background' then return end
 
     local bgName = value1
-    local meta = bgMeta[bgName]
-    if not meta then return end
+    local spec = bgSpecs[bgName]
+    if not spec then return end
 
-    if currentStage then
-        removeLuaScript('stages/' .. currentStage)
-    end
     clearBG()
-    addLuaScript('stages/' .. bgName)
-    currentStage = bgName
+    currentBG = bgName
 
-    if meta.topMask then
-        makeLuaSprite('topMask', nil, -1500, -1000)
-        makeGraphic('topMask', screenWidth * 4, 1000, '003399')
-        setScrollFactor('topMask', 0, 0)
-        addLuaSprite('topMask', false)
+    if spec.whiteFill then
+        makeLuaSprite('bgSprite1', nil, spec.x, spec.y)
+        makeGraphic('bgSprite1', screenWidth * 6, screenHeight * 6, 'FFFFFF')
+        setScrollFactor('bgSprite1', 0, 0)
+    else
+        makeLuaSprite('bgSprite1', spec.image, spec.x, spec.y)
+        scaleObject('bgSprite1', spec.scale, spec.scale)
+        setScrollFactor('bgSprite1', spec.scroll, spec.scroll)
+    end
+    if spec.shader then
+        initLuaShader('RTXLighting')
+        setSpriteShader('bgSprite1', 'RTXLighting')
+    end
+    addLuaSprite('bgSprite1', false)
+    regSprite('bgSprite1')
+
+    if spec.darkShader then
+        makeLuaSprite('bgSprite2', nil, -500, -500)
+        makeGraphic('bgSprite2', screenWidth * 2, screenHeight * 2, '000000')
+        setObjectCamera('bgSprite2', 'hud')
+        setScrollFactor('bgSprite2', 0, 0)
+        setProperty('bgSprite2.alpha', 0.5)
+        addLuaSprite('bgSprite2', true)
+        regSprite('bgSprite2')
     end
 
-    setProperty('camGame.zoom', meta.zoom)
-    setProperty('defaultCamZoom', meta.zoom)
+    setProperty('camGame.zoom', spec.zoom)
+    setProperty('defaultCamZoom', spec.zoom)
     setProperty('boyfriend.x', 800)
-    setProperty('boyfriend.y', meta.bfY)
-    setProperty('dad.y', meta.dadY)
+    setProperty('boyfriend.y', spec.bfY)
+    setProperty('dad.y', spec.dadY)
 
     if bgName == 'newmoon' then
         setProperty('gf.y', 800)
     end
-
-    if meta.whiteShader then
-        setSpriteShader('boyfriend', 'RTXLighting')
-        setSpriteShader('dad', 'RTXLighting')
-        setShaderSampler2('boyfriend', 'overlayColor', 0, 0, 0, 0)
-        setShaderSampler2('dad', 'overlayColor', 0, 0, 0, 0)
-        setShaderSampler2('boyfriend', 'satinColor', 0, 0, 0, 0)
-        setShaderSampler2('dad', 'satinColor', 0, 0, 0, 0)
-        setShaderSampler2('boyfriend', 'innerShadowColor', 0, 0, 0, 0)
-        setShaderSampler2('dad', 'innerShadowColor', 0, 0, 0, 0)
-    else
-        initLuaShader('RTXLighting')
-        setSpriteShader('boyfriend', 'RTXLighting')
-        setSpriteShader('dad', 'RTXLighting')
-    end
-
-    if dadName == 'bunbun' then
-        setProperty('dad.y', -300)
-        runTimer('fixDadPos', 0.01)
-    end
-
-    if dadName == 'beach_leopard' then
-        if bgName == 'gris' then
-            setProperty('dad.angle', -15)
-        else
-            setProperty('dad.angle', -10)
-        end
-    else
-        setProperty('dad.angle', 0)
-    end
-
-    if bgName == 'moon' and meta.darkShaderAlpha then
-        setProperty('darkShader.alpha', meta.darkShaderAlpha)
-        setObjectOrder('darkShader', getObjectOrder('boyfriend') + 10)
-    end
 end
 
 function onUpdatePost()
-    if currentStage == 'moon' then
+    if currentBG == 'moon' then
         setProperty('dad.x', 500)
         setProperty('boyfriend.y', 800)
     end
-    if currentStage == 'gris' and dadName == 'beach_leopard' then
+    if currentBG == 'gris' and dadName == 'beach_leopard' then
         setProperty('dad.y', -100)
         setProperty('boyfriend.y', -1000)
     end
