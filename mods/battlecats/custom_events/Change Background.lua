@@ -18,6 +18,7 @@ local bgSpecs = {
 }
 
 local currentBG = nil
+local dbgTimer = 0 -- 디버그용, 확인 끝나면 지울 것
 
 function onCreate()
     setVar('bgSpriteList', '')
@@ -79,6 +80,8 @@ function onEvent(name, value1, value2)
     setProperty('boyfriend.y', spec.bfY)
     setProperty('dad.y', spec.dadY)
 
+    luaTrace('[DEBUG] ' .. bgName .. ' 적용: dad.y 목표=' .. tostring(spec.dadY) .. ', 적용직후=' .. tostring(getProperty('dad.y')))
+
     if bgName == 'newmoon' then
         setProperty('gf.y', 800)
     end
@@ -92,5 +95,13 @@ function onUpdatePost()
     if currentBG == 'gris' and dadName == 'beach_leopard' then
         setProperty('dad.y', -100)
         setProperty('boyfriend.y', -1000)
+    end
+
+    -- 디버그용: newmoon일 때 1초마다 실제 dad.y 값 화면에 출력 (확인 끝나면 삭제)
+    if currentBG == 'newmoon' then
+        dbgTimer = dbgTimer + 1
+        if dbgTimer % 60 == 0 then
+            luaTrace('[DEBUG] 현재 dad.y = ' .. tostring(getProperty('dad.y')))
+        end
     end
 end
