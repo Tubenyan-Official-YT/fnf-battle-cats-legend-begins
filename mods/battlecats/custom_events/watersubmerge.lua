@@ -10,36 +10,52 @@ function onCreatePost()
 
     -- 2. BlendMode 없이 행별 fillRect 계산으로 타원을 뚫는 파란색 마스크 생성
     runHaxeCode([[
-        import openfl.display.BitmapData;
-        import openfl.geom.Rectangle;
-        import flixel.FlxSprite;
+		import openfl.display.BitmapData;
+		import flixel.FlxSprite;
 
-        // 0xCC = 알파 0.8, #030D22 = 어두운 남파랑
-        var bmd = new BitmapData(1280, 720, true, 0xCC0058c4);
+		var W = 1280, H = 720;
+		var baseColor:UInt = 0x0058c4;
+		var baseAlpha:Int = 0xCC;
 
-        var cx = 640.0; // 타원 중심 X
-        var cy = 360.0; // 타원 중심 Y
-        var rx = 500.0; // 가로 반지름 (전체 너비 1000)
-        var ry = 300.0; // 세로 반지름 (전체 높이 600)
+		var bmd = new BitmapData(W, H, true, (baseAlpha << 24) | baseColor);
 
-        // 타원 영역 내부만 투명(0x00000000)으로 채우기
-        for (i in 0...600) {
-            var y = 60 + i;
-            var dy = (y - cy) / ry;
-            var dx = rx * Math.sqrt(1.0 - (dy * dy));
-            var xStart = cx - dx;
-            var width = dx * 2.0;
+		var cx = 640.0, cy = 360.0;
+		var rx = 500.0, ry = 300.0;
+		var featherNorm = 0.08; // 타원 경계 안쪽 8% 구간에서 부드럽게 페이드
 
-            bmd.fillRect(new Rectangle(xStart, y, width, 1), 0x00000000);
-        }
+		var minX = Std.int(Math.max(0, cx - rx - 20));
+		var maxX = Std.int(Math.min(W - 1, cx + rx + 20));
+		var minY = Std.int(Math.max(0, cy - ry - 20));
+		var maxY = Std.int(Math.min(H - 1, cy + ry + 20));
+		var innerEdge = 1.0 - featherNorm;
 
-        var maskSprite = new FlxSprite(0, 0);
-        maskSprite.pixels = bmd;
-        maskSprite.cameras = [game.camOther]; // HUD 포함 최상단 카메라
-        maskSprite.alpha = 0;
-        game.add(maskSprite);
-        setVar('waterBlueMask', maskSprite);
-    ]])
+		for (py in minY...maxY + 1) {
+			for (px in minX...maxX + 1) {
+				var dx = (px - cx) / rx;
+				var dy = (py - cy) / ry;
+				var dist = Math.sqrt(dx * dx + dy * dy);
+
+				var alphaFactor:Float;
+				if (dist <= innerEdge) alphaFactor = 0.0;
+				else if (dist >= 1.0) alphaFactor = 1.0;
+				else {
+					var t = (dist - innerEdge) / featherNorm;
+					alphaFactor = t * t * (3 - 2 * t); // smoothstep
+				}
+
+				var a = Std.int(baseAlpha * alphaFactor);
+				bmd.setPixel32(px, py, (a << 24) | baseColor);
+			}
+		}
+
+		var maskSprite = new FlxSprite(0, 0);
+		maskSprite.pixels = bmd;
+		maskSprite.cameras = [game.camOther];
+		maskSprite.alpha = 0;
+		game.add(maskSprite);
+		setVar('waterBlueMask', maskSprite);
+	]])
+
 end
 
 function onEvent(eventName, value1, value2)
