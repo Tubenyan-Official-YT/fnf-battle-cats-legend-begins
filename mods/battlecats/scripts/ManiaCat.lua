@@ -15,12 +15,12 @@ local rightkey = 'right'
 local toggleKey = 'FIVE'
 
 -------- 스킨 선택 --------
-local skincat = 'Default'  -- Default / BF / GF / Custom
+local skincat = 'BF'  -- Default / BF / GF / Custom
 
 -------- 위치 / 크기 --------
 local ycat = 300
 local xcat = 0
-local scalecat = 0.2
+local scalecat = 0.1
 
 -- ----- 이하 코드 (건드릴 필요 없음) ----- --
 
@@ -29,7 +29,7 @@ local dirSprites = {
     'upright', 'leftdown', 'base_left', 'base_right'
 }
 
-local catVisible = true
+local catVisible = false
 local spritesCreated = false
 
 -- 스프라이트 생성 (1회)

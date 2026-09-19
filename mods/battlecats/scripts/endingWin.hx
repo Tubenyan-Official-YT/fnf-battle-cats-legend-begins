@@ -5,11 +5,30 @@ var victoryDone:Bool = false;
 
 function onCreate() {
 	setVar('rewards', []);
-	setVar('isFirst', Highscore.getScore(PlayState.instance.loadedSongName, PlayState.instance.difficulty) <= 0);
+
+	// PlayState.SONG.song과 PlayState.storyDifficulty를 활용하여 정확한 점수 데이터 참조
+	var songName:String = PlayState.SONG.song;
+	var diff:Int = PlayState.storyDifficulty;
+
+	setVar('isFirst', Highscore.getScore(songName, diff) <= 0);
 }
 
 function onEndSong() {
 	if (victoryDone) return;
+
+	var isFirstClear:Bool = getVar("isFirst");
+	if (isFirstClear) {
+		var rewards:Array<String> = getVar('rewards');
+		if (difficultyName == "chapter3") {
+			addLS(2);
+			rewards.push("LeaderShip + 2");
+		} else {
+			addLS(1);
+			rewards.push("LeaderShip + 1");
+		}
+		setVar('rewards', rewards);
+		setVar('isFirst', false); // 보상 지급 후 상태 업데이트
+	}
 
 	CustomSubstate.openCustomSubstate('victory', true);
 	return Function_Stop;
@@ -23,16 +42,18 @@ function onCustomSubstateCreate(name:String) {
 	if (name != 'victory') return;
 	camHUD.visible = false;
 
+	rewardTxt = '';
+
 	var mySprite:FlxSprite = new FlxSprite(0, 0);
 	mySprite.loadGraphic(Paths.image('endsong/win'));
 	mySprite.screenCenter();
 	mySprite.y -= 150;
 	customSubstate.add(mySprite);
 	
-	var xpTextBar:FlxSprite = new FlxSprite(0,0).loadGraphic(Paths.image('endsong/xpTextBar')).screenCenter();
+	var xpTextBar:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('endsong/xpTextBar')).screenCenter();
 	customSubstate.add(xpTextBar);
 
-	var rewards:Array<String> = getVar('rewards'); // 여기서 매번 새로 읽어야 최신값 반영됨
+	var rewards:Array<String> = getVar('rewards');
 
 	if (rewards != null && rewards.length > 0) {
 		var step:Int = 0;
@@ -54,9 +75,8 @@ function onCustomSubstateCreate(name:String) {
 
 		var myText:FlxText = new FlxText(0, 0, FlxG.width, rewardTxt, 20);
 		myText.setFormat(Paths.font('title.otf'), 20, FlxColor.WHITE, "center");
-		myText.y = rewardBox.y + (h - myText.height) / 2; // 박스 세로 중앙
+		myText.y = rewardBox.y + (h - myText.height) / 2;
 		customSubstate.add(myText);
-
 	}
 }
 

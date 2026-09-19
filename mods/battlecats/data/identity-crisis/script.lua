@@ -10,5 +10,6 @@ function onEndSong()
 			table.insert(rewards, "LeaderShip + 1")
 		end
 		setVar('rewards', rewards)
+		setVar('isFirst', false)
 	end
 end

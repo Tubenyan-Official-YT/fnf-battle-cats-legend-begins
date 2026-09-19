@@ -11,10 +11,10 @@ local bgSpecs = {
                    zoom = 0.4, bfY = 0,    dadY = 100, bfX = 800, dadX = -300},
     ['moon']    = {image = 'moon',    x = -1100, y = -2000, scale = 1.8, scroll = 1.0, darkShader = true,
                    zoom = 0.4, bfY = 0, dadY = -200, bfX = 900},
-    ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.0,
-                   zoom = 0.4, bfY = 800,  dadY = 800},
+    ['newmoon'] = {image = 'newmoon', x = -1500, y = -600,  scale = 2.5, scroll = 1.0,
+                   zoom = 0.4, bfY = 800,  dadY = 900, dadX = -300},
     ['white']   = {image = nil,       x = -2000, y = -2000, scale = 1,   scroll = 0, whiteFill = true,
-                   zoom = 0.4, bfY = 400,  dadY = -100},
+                   zoom = 0.4, bfY = 400,  dadY = 300, dadX = -200},
 }
 
 local currentBG = nil
@@ -58,10 +58,12 @@ function onEvent(name, value1, value2)
         scaleObject('bgSprite1', spec.scale, spec.scale)
         setScrollFactor('bgSprite1', spec.scroll, spec.scroll)
     end
-    if spec.shader then
+	
+    if bgName ~= "white" then
         initLuaShader('RTXLighting')
         setSpriteShader('bgSprite1', 'RTXLighting')
     end
+	
     addLuaSprite('bgSprite1', false)
     regSprite('bgSprite1')
 
@@ -101,9 +103,13 @@ function onEvent(name, value1, value2)
 		if (dadName == "bunbun") then
 			setProperty('dad.y', -100)
 		else
-			setProperty('dad.y', 800)
+			setProperty('dad.y', 900)
 		end
     end
+	if bgName == 'white' then
+		setProperty('gf.y', 475)
+		setProperty('gf.x', 500)
+	end
 	
 end
 
