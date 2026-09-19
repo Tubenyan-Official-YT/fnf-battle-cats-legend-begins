@@ -9,7 +9,7 @@
 			"indices": []
 		},
 		{
-			"offsets": [-40, -420],
+			"offsets": [-100, -460],
 			"loop": false,
 			"anim": "singLEFT",
 			"fps": 12,
@@ -17,7 +17,7 @@
 			"indices": []
 		},
 		{
-			"offsets": [-30, -450],
+			"offsets": [-100, -470],
 			"loop": false,
 			"anim": "singDOWN",
 			"fps": 12,
@@ -25,7 +25,7 @@
 			"indices": []
 		},
 		{
-			"offsets": [-60, -460],
+			"offsets": [-90, -460],
 			"loop": false,
 			"anim": "singUP",
 			"fps": 12,
@@ -33,7 +33,7 @@
 			"indices": []
 		},
 		{
-			"offsets": [-80, -450],
+			"offsets": [-120, -480],
 			"loop": false,
 			"anim": "singRIGHT",
 			"fps": 12,
@@ -44,7 +44,7 @@
 	"vocals_file": "",
 	"no_antialiasing": false,
 	"image": "characters/nyanko",
-	"position": [0, 0],
+	"position": [0, 50],
 	"healthicon": "nyanko",
 	"flip_x": false,
 	"healthbar_colors": [161, 161, 161],

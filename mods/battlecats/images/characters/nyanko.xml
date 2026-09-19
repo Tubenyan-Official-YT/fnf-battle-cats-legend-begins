@@ -2,10 +2,10 @@
 <TextureAtlas imagePath="nyanko.png">
 	<!-- Created using the Spritesheet and XML generator -->
 	<!-- https://uncertainprod.github.io/FNF-Spritesheet-XML-generator-Web -->
-	<SubTexture name="idle00000000" x="0" y="476" width="163" height="150" frameX="2" frameY="2" frameWidth="159" frameHeight="146"/>
-	<SubTexture name="idle00010000" x="662" y="149" width="154" height="147" frameX="2" frameY="2" frameWidth="150" frameHeight="143"/>
-	<SubTexture name="idle00020000" x="326" y="476" width="159" height="145" frameX="2" frameY="2" frameWidth="155" frameHeight="141"/>
-	<SubTexture name="idle00030000" x="163" y="476" width="163" height="146" frameX="2" frameY="2" frameWidth="159" frameHeight="142"/>
+	<SubTexture name="idle0003" x="0" y="476" width="163" height="150" frameX="2" frameY="2" frameWidth="159" frameHeight="146"/>
+	<SubTexture name="idle0002" x="662" y="149" width="154" height="147" frameX="2" frameY="2" frameWidth="150" frameHeight="143"/>
+	<SubTexture name="idle0001" x="326" y="476" width="159" height="145" frameX="2" frameY="2" frameWidth="155" frameHeight="141"/>
+	<SubTexture name="idle0000" x="163" y="476" width="163" height="146" frameX="2" frameY="2" frameWidth="159" frameHeight="142"/>
 	<SubTexture name="SingDown00000000" x="169" y="162" width="161" height="159" frameX="2" frameY="2" frameWidth="157" frameHeight="155"/>
 	<SubTexture name="SingDown00010000" x="0" y="0" width="166" height="162" frameX="2" frameY="2" frameWidth="162" frameHeight="158"/>
 	<SubTexture name="SingDown00020000" x="332" y="159" width="162" height="159" frameX="2" frameY="2" frameWidth="158" frameHeight="155"/>
