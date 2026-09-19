@@ -1,4 +1,5 @@
 import backend.Highscore;
+import backend.Song;
 
 var rewardTxt:String = '';
 var victoryDone:Bool = false;
@@ -7,7 +8,7 @@ function onCreate() {
 	setVar('rewards', []);
 
 	// PlayState.SONG.song과 PlayState.storyDifficulty를 활용하여 정확한 점수 데이터 참조
-	var songName:String = PlayState.SONG.song;
+	var songName:String = Song.loadedSongName; // PlayState.SONG.song 대신
 	var diff:Int = PlayState.storyDifficulty;
 
 	setVar('isFirst', Highscore.getScore(songName, diff) <= 0);
