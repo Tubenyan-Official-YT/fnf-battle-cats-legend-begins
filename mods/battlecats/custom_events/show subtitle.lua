@@ -21,6 +21,7 @@ local subtitle_translations = {
     ["booming"] = "터트리고 있어요.",
     ["those guys: I said I will do"] = "놈놈놈: 아 내가 한다고 했잖아",
     ["snake: you are troller f**k"] = "스네이크: 이 트롤 ㅅㄲ야",
+	["Who are you?"] = "넌 뭐야?"
 }
 
 function onCreatePost()
@@ -55,15 +56,19 @@ function onEvent(name, value1, value2, strumTime)
 			setProperty('BG.visible', false)
 			setProperty('subText.visible', false)
 			setProperty("subText.y", getProperty("BG.y") + (getProperty("BG.height") - getProperty("subText.height")) / 2)
-			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.001)
+			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.05)
 		else
 			setProperty('BG.visible', true)
 			setProperty('subText.visible', true)
-			-- 번역 테이블에서 lookup, 없으면 원문 그대로
-			setProperty('subText.text', subtitle_translations[value1] or value1)
+			-- 한국어일 때만 번역 테이블 lookup, 다른 언어는 항상 원문
+			local displayText = value1
+			if getCurrentLanguage() == 'ko-KR' then
+				displayText = subtitle_translations[value1] or value1
+			end
+			setProperty('subText.text', displayText)
 			screenCenter('subText', 'x')
 			setProperty("subText.y", getProperty("BG.y") + (getProperty("BG.height") - getProperty("subText.height")) / 2)
-			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.001)
+			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.05)
 		end
 	end
 
