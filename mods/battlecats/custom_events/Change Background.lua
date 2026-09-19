@@ -1,18 +1,18 @@
 -- 배경별 스펙: 전부 이 스크립트 안에서 직접 만들고, 만든 태그는 bgSpriteList에 등록.
 -- 스테이지 폴더 재사용(addLuaScript) 안 함 -> 곡 기본 stage랑 충돌 안 남.
 local bgSpecs = {
-    ['noul']    = {image = 'noul',    x = -650,  y = -450,  scale = 3,   scroll = 0.7, shader = true,
+    ['noul']    = {image = 'noul',    x = -650,  y = -450,  scale = 3,   scroll = 1.0, shader = true,
                    zoom = 0.9, bfY = 450,  dadY = 450},
-    ['night']   = {image = 'night',   x = -1100, y = -800,  scale = 4,   scroll = 0.5,
-                   zoom = 0.6, bfY = 300,  dadY = 400},
+    ['night']   = {image = 'night',   x = -1100, y = -800,  scale = 4,   scroll = 1.0,
+                   zoom = 0.6, bfY = 300,  dadY = 400, bfX = 1200},
     ['gris']    = {image = 'gris',    x = -1550, y = -1300, scale = 5,   scroll = 1.0,
-                   zoom = 0.3, bfY = -500, dadY = -1000},
-    ['desert']  = {image = 'desert',  x = -1700, y = -2000, scale = 2.5, scroll = 0.5,
-                   zoom = 0.4, bfY = 0,    dadY = -200},
-    ['moon']    = {image = 'moon',    x = -1100, y = -2000, scale = 1.8, scroll = 0.5, darkShader = true,
-                   zoom = 0.4, bfY = 100, dadY = 200},
-    ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.2,
-                   zoom = 0.4, bfY = 800,  dadY = -100},
+                   zoom = 0.6, bfY = -500, dadY = -1000, bfX = 900, dadX = 100},
+    ['desert']  = {image = 'desert',  x = -1700, y = -2000, scale = 2.5, scroll = 1.0,
+                   zoom = 0.4, bfY = 0,    dadY = 100, bfX = 800, dadX = -300},
+    ['moon']    = {image = 'moon',    x = -1100, y = -2000, scale = 1.8, scroll = 1.0, darkShader = true,
+                   zoom = 0.4, bfY = 0, dadY = -200, bfX = 900},
+    ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.0,
+                   zoom = 0.4, bfY = 800,  dadY = 800},
     ['white']   = {image = nil,       x = -2000, y = -2000, scale = 1,   scroll = 0, whiteFill = true,
                    zoom = 0.4, bfY = 400,  dadY = -100},
 }
@@ -76,17 +76,35 @@ function onEvent(name, value1, value2)
 
     setProperty('camGame.zoom', spec.zoom)
     setProperty('defaultCamZoom', spec.zoom)
-    setProperty('boyfriend.x', 800)
+
+    -- x는 선택 옵션: spec에 bfX/dadX 없으면 안 건드림(bf는 기본 800 유지)
+    local bfX = spec.bfX or 800
+    setProperty('boyfriend.x', bfX)
     setProperty('boyfriend.y', spec.bfY)
     setProperty('dad.y', spec.dadY)
+    setVar('curBfX', tostring(bfX))
     setVar('curBfY', tostring(spec.bfY))
     setVar('curDadY', tostring(spec.dadY))
+
+    if spec.dadX then
+        setProperty('dad.x', spec.dadX)
+        setVar('curDadX', tostring(spec.dadX))
+    else
+        setVar('curDadX', '')
+    end
 
     luaTrace('[DEBUG] ' .. bgName .. ' 적용: dad.y 목표=' .. tostring(spec.dadY) .. ', 적용직후=' .. tostring(getProperty('dad.y')))
 
     if bgName == 'newmoon' then
         setProperty('gf.y', 800)
+		if (dadName == "bunbun") then
+			setProperty('dad.y', -100)
+		end
+		else
+			setProperty('dad.y', 800)
+		end
     end
+	
 end
 
 function onUpdatePost()
