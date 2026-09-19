@@ -79,6 +79,8 @@ function onEvent(name, value1, value2)
     setProperty('boyfriend.x', 800)
     setProperty('boyfriend.y', spec.bfY)
     setProperty('dad.y', spec.dadY)
+    setVar('curBfY', tostring(spec.bfY))
+    setVar('curDadY', tostring(spec.dadY))
 
     luaTrace('[DEBUG] ' .. bgName .. ' 적용: dad.y 목표=' .. tostring(spec.dadY) .. ', 적용직후=' .. tostring(getProperty('dad.y')))
 

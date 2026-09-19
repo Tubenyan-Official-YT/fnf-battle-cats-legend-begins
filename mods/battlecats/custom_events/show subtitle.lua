@@ -60,6 +60,7 @@ function onEvent(name, value1, value2, strumTime)
 		else
 			setProperty('BG.visible', true)
 			setProperty('subText.visible', true)
+			-- 한국어일 때만 번역 테이블 lookup, 다른 언어는 항상 원문
 			local displayText = value1
 			if getCurLanguage() == 'ko-KR' then
 				displayText = subtitle_translations[value1] or value1
