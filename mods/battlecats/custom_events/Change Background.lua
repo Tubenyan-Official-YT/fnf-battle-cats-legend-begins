@@ -10,9 +10,9 @@ local bgSpecs = {
     ['desert']  = {image = 'desert',  x = -1700, y = -2000, scale = 2.5, scroll = 0.5,
                    zoom = 0.4, bfY = 0,    dadY = -200},
     ['moon']    = {image = 'moon',    x = -1100, y = -2000, scale = 1.8, scroll = 0.5, darkShader = true,
-                   zoom = 0.4, bfY = 1000, dadY = 200},
+                   zoom = 0.4, bfY = 100, dadY = 200},
     ['newmoon'] = {image = 'newmoon', x = -1000, y = -600,  scale = 2.5, scroll = 1.2,
-                   zoom = 0.4, bfY = 400,  dadY = 800},
+                   zoom = 0.4, bfY = 800,  dadY = -100},
     ['white']   = {image = nil,       x = -2000, y = -2000, scale = 1,   scroll = 0, whiteFill = true,
                    zoom = 0.4, bfY = 400,  dadY = -100},
 }
