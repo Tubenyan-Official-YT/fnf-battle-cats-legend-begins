@@ -40,7 +40,7 @@ end
 
 function onEvent(name, value1, value2)
     if name ~= 'Change Background' then return end
-	luaTrace('[DEBUG] CB 이벤트 진입! value1=' .. tostring(value1)) -- 추가
+	debugPrint('[DEBUG] CB 이벤트 진입! value1=' .. tostring(value1)) -- 추가
 
     local bgName = value1
     local spec = bgSpecs[bgName]
@@ -94,13 +94,12 @@ function onEvent(name, value1, value2)
         setVar('curDadX', '')
     end
 
-    luaTrace('[DEBUG] ' .. bgName .. ' 적용: dad.y 목표=' .. tostring(spec.dadY) .. ', 적용직후=' .. tostring(getProperty('dad.y')))
+    debugPrint('[DEBUG] ' .. bgName .. ' 적용: dad.y 목표=' .. tostring(spec.dadY) .. ', 적용직후=' .. tostring(getProperty('dad.y')))
 
     if bgName == 'newmoon' then
         setProperty('gf.y', 800)
 		if (dadName == "bunbun") then
 			setProperty('dad.y', -100)
-		end
 		else
 			setProperty('dad.y', 800)
 		end
