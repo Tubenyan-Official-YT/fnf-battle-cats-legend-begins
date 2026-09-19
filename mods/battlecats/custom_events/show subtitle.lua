@@ -60,12 +60,16 @@ function onEvent(name, value1, value2, strumTime)
 		else
 			setProperty('BG.visible', true)
 			setProperty('subText.visible', true)
-			-- 번역 테이블에서 lookup, 없으면 원문 그대로
-			setProperty('subText.text', subtitle_translations[value1] or value1)
+			local displayText = value1
+			if getCurLanguage() == 'ko-KR' then
+				displayText = subtitle_translations[value1] or value1
+			end
+			setProperty('subText.text', displayText)
 			screenCenter('subText', 'x')
 			setProperty("subText.y", getProperty("BG.y") + (getProperty("BG.height") - getProperty("subText.height")) / 2)
 			doTweenColor('TextColor', 'subText', '' .. value2 .. '', 0.05)
 		end
+
 	end
 
 end
