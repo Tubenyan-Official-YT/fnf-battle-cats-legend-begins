@@ -40,6 +40,7 @@ end
 
 function onEvent(name, value1, value2)
     if name ~= 'Change Background' then return end
+	luaTrace('[DEBUG] CB 이벤트 진입! value1=' .. tostring(value1)) -- 추가
 
     local bgName = value1
     local spec = bgSpecs[bgName]
